@@ -14,7 +14,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 @WithMockUser
 @SpringBootTest
 @AutoConfigureMockMvc
-class SampleApplicationTests {
+class SampleApplicationTest {
 
     @ArchTest
     ArchRule dddRules = JMoleculesDddRules.all();
