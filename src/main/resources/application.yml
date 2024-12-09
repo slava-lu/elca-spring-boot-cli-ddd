@@ -8,13 +8,6 @@ security:
 spring:
   application:
     name: repertoire-backend
-  data:
-    rest:
-      base-path: /api
-  jpa:
-    properties:
-      hibernate:
-        globally_quoted_identifiers: true
 springdoc:
   swagger-ui:
     csrf:

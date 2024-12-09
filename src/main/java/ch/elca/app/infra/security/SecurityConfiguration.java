@@ -68,33 +68,6 @@ public class SecurityConfiguration {
     */
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
-                /*
-                        TODO: enable CSRF without breaking swagger-ui
-                        // see https://docs.spring.io/spring-security/reference/servlet/exploits/csrf.html#csrf-integration-javascript
-                http
-                        .csrf((csrf) -> csrf
-                                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                                .csrfTokenRequestHandler(new SpaCsrfTokenRequestHandler()))
-                                .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
-                 */
-                .authorizeHttpRequests(auth -> auth.requestMatchers(
-                                "/v3/api-docs/**",
-                                "/swagger-ui/**",
-                                "/swagger-ui.html",
-                                "index.html",
-                                "/login",
-                                "/logout")
-                        .permitAll()
-                        .anyRequest()
-                        .authenticated())
-                .httpBasic(Customizer.withDefaults());
-        return http.build();
-    }
-
-    @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         val userDetails = securityProperties.users.stream()
                 .map(it -> User.builder()
